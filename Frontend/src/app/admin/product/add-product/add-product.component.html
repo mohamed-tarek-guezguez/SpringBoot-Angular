@@ -1,0 +1,154 @@
+<app-dashboard></app-dashboard>
+
+<div class="card my-5">
+  <div class="card-header bg-danger">
+    <h5 class="text-center mb-0 text-white">
+      Product
+      <i
+        class="fa fa-bolt small px-1"
+        style="font-size: 15px"
+        aria-hidden="true"
+      ></i>
+      Add
+    </h5>
+  </div>
+  <div class="card-body">
+    <div class="d-flex justify-content-center">
+      <form style="width: 350px" enctype="multipart/form-data">
+        <div class="form-group mb-3">
+          <label class="text-muted small">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Enter Name"
+            [(ngModel)]="item.name"
+            name="name"
+          />
+          <small class="form-text text-danger" *ngIf="error">
+            {{ error.name }}
+          </small>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="text-muted small">Author</label>
+          <input
+            type="text"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Enter Author"
+            [(ngModel)]="item.author"
+            name="author"
+          />
+          <small class="form-text text-danger" *ngIf="error">
+            {{ error.author }}
+          </small>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="text-muted small">Image</label>
+          <input
+            type="file"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Enter Image"
+            (change)="onChange($event)"
+            name="imageFile"
+            accept="image/png, image/jpeg"
+          />
+          <small class="form-text text-danger" *ngIf="error">
+            {{ error.image }}
+          </small>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="text-muted small">Description</label>
+          <textarea
+            name="description"
+            class="form-control"
+            rows="3"
+            [(ngModel)]="item.description"
+            placeholder="Enter Description"
+          ></textarea>
+
+          <small class="form-text text-danger" *ngIf="error">
+            {{ error.description }}
+          </small>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="text-muted small">Language</label>
+          <select
+            name="languageVal"
+            class="form-select"
+            [(ngModel)]="languageVal"
+          >
+            <option value="English">English</option>
+            <option value="French">French</option>
+            <option value="Arabic">Arabic</option>
+            <option value="Spanish">Spanish</option>
+            <option value="Italian">Italian</option>
+            <option value="Russian">Russian</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Korean">Korean</option>
+            <option value="German">German</option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="text-muted small">Pages</label>
+          <input
+            type="number"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Enter Pages"
+            [(ngModel)]="item.pages"
+            name="pages"
+            min="0"
+          />
+          <small class="form-text text-danger" *ngIf="error">
+            {{ error.pages }}
+          </small>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="text-muted small">Year</label>
+          <input
+            type="number"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Enter Year"
+            [(ngModel)]="item.year"
+            name="year"
+            min="1000"
+            max="9999"
+          />
+          <small class="form-text text-danger" *ngIf="error">
+            {{ error.year }}
+          </small>
+        </div>
+
+        <div class="form-group mb-4">
+          <label>Category</label>
+          <select
+            class="form-select"
+            name="categoryId"
+            [(ngModel)]="categoryId"
+            (change)="onChangeCategory($event)"
+          >
+            <option *ngFor="let c of categorys" [value]="c.id">
+              {{ c.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" (click)="add()" class="btn btn-danger">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

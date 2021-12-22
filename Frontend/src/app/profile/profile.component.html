@@ -1,0 +1,113 @@
+<br />
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col col-lg-6 mb-4 mb-lg-0">
+    <div class="card mb-3" style="border-radius: 0.5rem">
+      <div class="row g-0">
+        <div
+          class="col-md-4 gradient-custom text-center text-white"
+          style="
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+          "
+        >
+          <img
+            src="../../assets/images/user.gif"
+            alt="Avatar"
+            class="img-fluid mt-5 mb-4"
+            style="width: 100px"
+          />
+          <h5>{{ item.username }}</h5>
+          <p class="small mb-1">{{ item.email }}</p>
+          <p class="small">{{ item.role }}</p>
+          <i class="far fa-edit mb-5"></i>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body p-4">
+            <form enctype="multipart/form-data">
+              <h6>Update Information</h6>
+              <hr class="mt-0 mb-3" />
+
+              <div class="form-group mb-2">
+                <label class="text-muted" style="font-size: 12px"
+                  >UserName</label
+                >
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  autocomplete="off"
+                  placeholder="Enter UserName"
+                  [(ngModel)]="item.username"
+                  name="username"
+                />
+                <small class="form-text text-danger" *ngIf="error">
+                  {{ error.username }}
+                </small>
+              </div>
+
+              <div class="form-group mb-2">
+                <label class="text-muted" style="font-size: 12px">Email</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  autocomplete="off"
+                  placeholder="Enter Email"
+                  [(ngModel)]="item.email"
+                  name="email"
+                />
+                <small class="form-text text-danger" *ngIf="error">
+                  {{ error.email }}
+                </small>
+              </div>
+
+              <hr class="mt-0 mb-3" />
+
+              <div class="form-group mb-2">
+                <label class="text-muted" style="font-size: 12px"
+                  >Password</label
+                >
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  autocomplete="off"
+                  placeholder="Enter Password"
+                  [(ngModel)]="newPassword"
+                  name="newPassword"
+                />
+                <small class="form-text text-danger" *ngIf="error">
+                  {{ error.password }}
+                </small>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="text-muted" style="font-size: 12px"
+                  >Confirm Password</label
+                >
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  autocomplete="off"
+                  placeholder="Enter Confirm Password"
+                  [(ngModel)]="confirmPassword"
+                  name="confirmPassword"
+                />
+                <small class="form-text text-danger" *ngIf="passworderror">
+                  {{ passworderror }}
+                </small>
+              </div>
+
+              <div class="text-center">
+                <button
+                  type="submit"
+                  (click)="update()"
+                  class="btn btn-sm btn-success"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

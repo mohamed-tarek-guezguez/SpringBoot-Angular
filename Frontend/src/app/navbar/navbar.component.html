@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/products"
+      >Book
+      <i
+        class="fa fa-bolt small px-1"
+        style="font-size: 12px"
+        aria-hidden="true"
+      ></i>
+      Shop</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarText"
+      aria-controls="navbarText"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/products"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact">Contact</a>
+        </li>
+      </ul>
+
+      <div>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown" *ngIf="userId">
+            <a
+              class="nav-link dropdown-toggle text-white m-0 p-0"
+              href="#"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fa fa-user small" aria-hidden="true"></i>&nbsp;&nbsp;{{
+                user.username
+              }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" routerLink="/profile">
+                  <i class="fa fa-user-circle" aria-hidden="true"></i>
+                  &nbsp;&nbsp;Profile
+                </a>
+              </li>
+              <li *ngIf="user.role == 'admin'">
+                <a class="dropdown-item" routerLink="/admin">
+                  <i class="fa fa-tachometer-alt" aria-hidden="true"></i>
+                  &nbsp;&nbsp;Dashboard
+                </a>
+              </li>
+              <li><hr class="dropdown-divider text-muted" /></li>
+              <li>
+                <button class="dropdown-item" (click)="logout()">
+                  <i class="fas fa-sign-out-alt"></i>
+                  &nbsp;&nbsp;Logout
+                </button>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item" *ngIf="!userId">
+            <span class="navbar-text">
+              <a routerLink="/login">
+                <i
+                  class="fa fa-user"
+                  style="font-size: 14px"
+                  aria-hidden="true"
+                ></i>
+                &nbsp;Login
+              </a>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

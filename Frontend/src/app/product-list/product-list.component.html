@@ -1,0 +1,199 @@
+<!-- Carousel wrapper -->
+<div
+  id="carouselBasicExample"
+  class="carousel slide carousel-fade"
+  data-mdb-ride="carousel"
+>
+  <!-- Indicators -->
+  <div class="carousel-indicators">
+    <button
+      type="button"
+      data-mdb-target="#carouselBasicExample"
+      data-mdb-slide-to="0"
+      class="active"
+      aria-current="true"
+      aria-label="Slide 1"
+    ></button>
+    <button
+      type="button"
+      data-mdb-target="#carouselBasicExample"
+      data-mdb-slide-to="1"
+      aria-label="Slide 2"
+    ></button>
+    <button
+      type="button"
+      data-mdb-target="#carouselBasicExample"
+      data-mdb-slide-to="2"
+      aria-label="Slide 3"
+    ></button>
+  </div>
+
+  <!-- Inner -->
+  <div class="carousel-inner">
+    <!-- Single item -->
+    <div class="carousel-item active">
+      <img
+        src="../../assets/images/book3.gif"
+        style="max-height: 400px"
+        class="d-block w-100"
+        alt="Sunset Over the City"
+      />
+    </div>
+
+    <!-- Single item -->
+    <div class="carousel-item">
+      <img
+        src="../../assets/images/book1.gif"
+        style="max-height: 400px"
+        class="d-block w-100"
+        alt="Canyon at Nigh"
+      />
+    </div>
+
+    <!-- Single item -->
+    <div class="carousel-item">
+      <img
+        src="../../assets/images/book2.gif"
+        style="max-height: 400px"
+        class="d-block w-100"
+        alt="Cliff Above a Stormy Sea"
+      />
+    </div>
+  </div>
+  <!-- Inner -->
+
+  <!-- Controls -->
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-mdb-target="#carouselBasicExample"
+    data-mdb-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-mdb-target="#carouselBasicExample"
+    data-mdb-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<!-- Carousel wrapper -->
+
+<div class="input-group my-5">
+  <div class="dropdown">
+    <button
+      class="btn btn-white dropdown-toggle h-100 shadow-0 border"
+      type="button"
+      id="dropdownMenuButton"
+      data-mdb-toggle="dropdown"
+      aria-expanded="false"
+    >
+      Category<i class="fa fa-arrow-right small px-1" aria-hidden="true"></i
+      >{{ categoryText }}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <li>
+        <button class="dropdown-item" (click)="filter('all')">All</button>
+      </li>
+      <li>
+        <hr class="dropdown-divider py-0 my-0" />
+      </li>
+      <li *ngFor="let c of categorys">
+        <button class="dropdown-item" (click)="filter(c.name)">
+          {{ c.name }}
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  &nbsp;&nbsp;
+
+  <input
+    type="text"
+    class="form-control py-4"
+    placeholder="Seach..."
+    [(ngModel)]="searchText"
+    (keyup)="Search()"
+  />
+</div>
+
+<div
+  class="
+    row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-6
+    g-4
+    justify-content-center
+  "
+  *ngIf="!isEmpty(); else empty"
+>
+  <div class="col" *ngFor="let p of products">
+    <div class="card h-100">
+      <a
+        routerLink="/products/{{ p.id }}"
+        class="text-dark text-decoration-none"
+      >
+        <img [src]="imgUrl + p.id" class="card-img-top h-100" alt="book-img" />
+      </a>
+      <div class="card-body">
+        <h5 class="card-title mb-0 pb-0">
+          <a
+            routerLink="/products/{{ p.id }}"
+            class="text-dark text-decoration-none"
+          >
+            {{ p.name }}
+          </a>
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="my-5 d-flex justify-content-center"
+  *ngIf="searchText == '' && categoryText == 'all' && totalPages > 1"
+>
+  <nav aria-label="...">
+    <ul class="pagination">
+      <li class="page-item border" *ngIf="currentPage > 0">
+        <button class="page-link" (click)="Prev()">Prev</button>
+      </li>
+
+      <li
+        class="page-item"
+        *ngFor="let item of [].constructor(totalPages); let i = index"
+      >
+        <button
+          class="page-link border active"
+          style="border-radius: 0"
+          *ngIf="currentPage === i"
+          (click)="GoPage(i)"
+        >
+          {{ i + 1 }}
+        </button>
+
+        <button
+          class="page-link border"
+          style="border-radius: 0"
+          *ngIf="currentPage !== i"
+          (click)="GoPage(i)"
+        >
+          {{ i + 1 }}
+        </button>
+      </li>
+
+      <li class="page-item border" *ngIf="currentPage < totalPages - 1">
+        <button class="page-link" (click)="Next()">Next</button>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<ng-template #empty>
+  <marquee class="alert alert-danger my-4" role="alert">
+    No Result Found!
+  </marquee>
+</ng-template>

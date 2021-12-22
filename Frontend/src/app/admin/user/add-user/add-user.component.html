@@ -1,0 +1,94 @@
+<app-dashboard></app-dashboard>
+
+<div class="card my-5">
+  <div class="card-header bg-success">
+    <h5 class="text-center mb-0 text-white">
+      User
+      <i
+        class="fa fa-bolt small px-1"
+        style="font-size: 15px"
+        aria-hidden="true"
+      ></i>
+      Add
+    </h5>
+  </div>
+  <div class="card-body">
+    <div class="d-flex justify-content-center">
+      <form style="width: 350px" enctype="multipart/form-data">
+        <div class="form-group mb-3">
+          <label class="text-muted small">UserName</label>
+          <input
+            type="text"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Enter UserName"
+            [(ngModel)]="item.username"
+            name="username"
+          />
+          <small class="form-text text-danger" *ngIf="error">
+            {{ error.username }}
+          </small>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="text-muted small">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Enter Email"
+            [(ngModel)]="item.email"
+            name="email"
+          />
+          <small class="form-text text-danger" *ngIf="error">
+            {{ error.email }}
+          </small>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="text-muted small">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Enter Password"
+            [(ngModel)]="item.password"
+            name="password"
+          />
+          <small class="form-text text-danger" *ngIf="error">
+            {{ error.password }}
+          </small>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="text-muted small">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Enter Confirm Password"
+            [(ngModel)]="password2"
+            name="password2"
+          />
+          <small class="form-text text-danger" *ngIf="confirmerror">
+            {{ confirmerror }}
+          </small>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="text-muted small">User</label>
+          <select name="role" class="form-select" [(ngModel)]="item.role">
+            <option value="user">user</option>
+            <option value="admin">admin</option>
+          </select>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" (click)="add()" class="btn btn-success">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
