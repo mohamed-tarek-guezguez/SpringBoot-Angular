@@ -29,6 +29,13 @@
       <p class="small"><b>Language : </b> {{ productData.language }}</p>
       <p class="small"><b>Pages : </b> {{ productData.pages }}</p>
       <p class="small"><b>Year : </b> {{ productData.year }}</p>
+
+      <div class="text-center">
+        <button class="btn btn-primary" (click)="addToCart(productData)">
+          <i class="fa fa-shopping-cart small px-1" aria-hidden="true"></i>
+          Add To Cart
+        </button>
+      </div>
     </div>
   </div>
   <div class="card-footer text-muted text-center">

@@ -27,6 +27,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactsComponent } from './admin/contacts/contacts.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ContactsComponent } from './admin/contacts/contacts.component';
     LoginComponent,
     ContactComponent,
     ContactsComponent,
+    CartComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

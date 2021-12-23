@@ -35,7 +35,12 @@ import { UpdateUserComponent } from './admin/user/update-user/update-user.compon
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 
+import { CartComponent } from './cart/cart.component';
+
 const routes: Routes = [
+  // Cart Route
+  { path: 'cart', component: CartComponent },
+
   // Auth
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

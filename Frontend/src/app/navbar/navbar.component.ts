@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   user = {} as User;
   userId: any;
   isUserAdmin: any = 'ok';
+  dataLength: any;
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('authUserId');
@@ -22,6 +23,8 @@ export class NavbarComponent implements OnInit {
         this.user = data;
       });
     }
+
+    this.dataLength = JSON.parse(localStorage['myCart']).length;
   }
 
   logout(): void {
