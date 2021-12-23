@@ -17,6 +17,10 @@
 <img src="img/4.jpg" width="100%">
 <br>
   
+<h4>⚡Cart Page<h4>
+<img src="img/11.jpg" width="100%">
+<br>
+  
 <h4>⚡Category Admin Page<h4>
 <img src="img/5.jpg" width="100%">
 <br>
