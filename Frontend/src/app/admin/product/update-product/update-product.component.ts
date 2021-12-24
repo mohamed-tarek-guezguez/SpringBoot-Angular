@@ -25,10 +25,12 @@ export class UpdateProductComponent implements OnInit {
   categoryId?: any;
   languageVal?: any;
   imageFile?: any;
+  updateImage: any = false;
 
   onChange(event: any) {
     this.imageFile = event.target.files[0];
     this.item.image = this.imageFile.name;
+    this.updateImage = true;
   }
 
   ngOnInit(): void {
@@ -58,15 +60,19 @@ export class UpdateProductComponent implements OnInit {
 
     this.ProductService.updateProduct(this.id, this.item).subscribe(
       (response) => {
-        this.ProductService.upload(this.imageFile).subscribe(
-          (response) => {
-            this.router.navigate(['admin/product']);
-          },
-          (err) => {
-            this.error = err.error;
-            console.log(err.error);
-          }
-        );
+        if (this.updateImage) {
+          this.ProductService.upload(this.imageFile).subscribe(
+            (data) => {
+              this.router.navigate(['admin/product']);
+            },
+            (errr) => {
+              this.error = errr.error;
+              console.log(errr.error);
+            }
+          );
+        } else {
+          this.router.navigate(['admin/product']);
+        }
       },
       (err) => {
         this.error = err.error;
