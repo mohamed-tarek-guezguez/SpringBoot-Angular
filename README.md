@@ -5,6 +5,10 @@
 <img src="img/1.jpg" width="100%">
 <br>
   
+<h4>⚡Details Page<h4>
+<img src="img/12.jpg" width="100%">
+<br>
+  
 <h4>⚡Login Page<h4>
 <img src="img/2.jpg" width="100%">
 <br>
