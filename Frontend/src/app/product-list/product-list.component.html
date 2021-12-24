@@ -134,9 +134,15 @@
     <div class="card h-100">
       <a
         routerLink="/products/{{ p.id }}"
-        class="text-dark text-decoration-none"
+        class="text-dark text-decoration-none h-100"
       >
-        <img [src]="imgUrl + p.id" class="card-img-top h-100" alt="book-img" />
+        <div class="bg-image hover-zoom h-100">
+          <img
+            [src]="imgUrl + p.id"
+            class="card-img-top h-100"
+            alt="book-img"
+          />
+        </div>
       </a>
       <div class="card-body">
         <h5 class="card-title mb-0 pb-0">

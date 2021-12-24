@@ -12,7 +12,6 @@ export class NavbarComponent implements OnInit {
 
   user = {} as User;
   userId: any;
-  isUserAdmin: any = 'ok';
   dataLength: any;
 
   ngOnInit(): void {
@@ -25,6 +24,10 @@ export class NavbarComponent implements OnInit {
     }
 
     this.dataLength = JSON.parse(localStorage['myCart']).length;
+
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 1000 * 10);
   }
 
   logout(): void {

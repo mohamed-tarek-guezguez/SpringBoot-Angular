@@ -56,7 +56,7 @@ public class UserController {
 			return new ResponseEntity<>("email already exist!", HttpStatus.OK);
 		}
 		// crypt pass
-		// gestionUser.save(u);
+		gestionUser.save(u);
 		System.out.println(u);
 		return new ResponseEntity<>("User has been successfully added", HttpStatus.OK);
 	}

@@ -12,6 +12,7 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import com.example.book.entity.Book;
 import com.example.book.entity.Category;
 import com.example.book.entity.Contact;
+import com.example.book.entity.Rating;
 import com.example.book.entity.User;
 
 @SpringBootApplication
@@ -33,6 +34,7 @@ public class BookStoreApplication implements CommandLineRunner {
 		rrc.exposeIdsFor(Category.class);
 		rrc.exposeIdsFor(Book.class);	
 		rrc.exposeIdsFor(Contact.class);
+		rrc.exposeIdsFor(Rating.class);
 	}
 
 }

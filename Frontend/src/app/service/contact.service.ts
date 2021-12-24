@@ -33,8 +33,8 @@ export class ContactService {
     return this.client.get<Contact>(`${this.host}/${id}`);
   }
 
-  public addContact(Contact: Contact): Observable<void> {
-    return this.client.post<void>(this.host, Contact, this.httpOptions);
+  public addContact(contact: Contact): Observable<void> {
+    return this.client.post<void>(this.host, contact, this.httpOptions);
   }
 
   public deleteContact(id: any): Observable<void> {

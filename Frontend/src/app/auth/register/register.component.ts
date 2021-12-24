@@ -33,6 +33,9 @@ export class RegisterComponent implements OnInit {
         },
         (err) => {
           this.error = err.error;
+          if (err.error.error === 'Internal Server Error') {
+            this.error.email = 'email already exists';
+          }
         }
       );
     }
