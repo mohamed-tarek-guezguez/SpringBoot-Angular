@@ -15,7 +15,7 @@ public interface IGestionBook {
 	public Book getById(int id);
 	public List<Book> getAll();
 	public Page<Book> getAllPagin(Pageable pageable);
-	public List<Book> getByKeyword(String keyword);
+	public Page<Book> getByKeyword(String keyword, Pageable pageable);
 	public List<Book> getByCategory(String keyword);
 	public void delete(int id);
 	public byte[] getImage(int id) throws IOException;

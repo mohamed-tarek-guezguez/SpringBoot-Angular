@@ -20,6 +20,9 @@ export class ProductListComponent implements OnInit {
   categorys?: Category[];
   totalPages?: any;
   currentPage: any = 0;
+  totalPagesSearch?: any;
+  currentPageSearch?: any = 0;
+  isLoading?: boolean = true;
 
   imgUrl = 'http://localhost:8080/api/book/getImage/';
 
@@ -31,7 +34,22 @@ export class ProductListComponent implements OnInit {
 
       this.CategoryService.getCategorys().subscribe((data) => {
         this.categorys = data;
+
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
       });
+    });
+  }
+
+  LoadSearch() {
+    this.ProductService.getProductsByKeyword(
+      this.searchText,
+      this.currentPageSearch
+    ).subscribe((data) => {
+      this.products = data.content;
+      this.totalPagesSearch = data.totalPages;
+      this.currentPageSearch = data.number;
     });
   }
 
@@ -45,11 +63,7 @@ export class ProductListComponent implements OnInit {
     if (this.searchText === '') {
       this.Load();
     } else {
-      this.ProductService.getProductsByKeyword(this.searchText).subscribe(
-        (data) => {
-          this.products = data;
-        }
-      );
+      this.LoadSearch();
     }
   }
 
@@ -75,21 +89,40 @@ export class ProductListComponent implements OnInit {
   }
 
   Prev() {
-    if (this.currentPage > 0) {
-      this.currentPage--;
-      this.Load();
+    if (this.searchText === '') {
+      if (this.currentPage > 0) {
+        this.currentPage--;
+        this.Load();
+      }
+    } else {
+      if (this.currentPageSearch > 0) {
+        this.currentPageSearch--;
+        this.LoadSearch();
+      }
     }
   }
 
   Next() {
-    if (this.currentPage < this.totalPages - 1) {
-      this.currentPage++;
-      this.Load();
+    if (this.searchText === '') {
+      if (this.currentPage < this.totalPages - 1) {
+        this.currentPage++;
+        this.Load();
+      }
+    } else {
+      if (this.currentPageSearch < this.totalPagesSearch - 1) {
+        this.currentPageSearch++;
+        this.LoadSearch();
+      }
     }
   }
 
   GoPage(i: any) {
-    this.currentPage = i;
-    this.Load();
+    if (this.searchText === '') {
+      this.currentPage = i;
+      this.Load();
+    } else {
+      this.currentPageSearch = i;
+      this.LoadSearch();
+    }
   }
 }

@@ -38,8 +38,8 @@ public class GestionBook implements IGestionBook {
 	}
 
 	@Override
-	public List<Book> getByKeyword(String keyword) {
-		return br.findByNameContains(keyword);
+	public Page<Book> getByKeyword(String keyword, Pageable pageable) {
+		return br.findByNameContains(keyword, pageable);
 	}
 	
 	@Override

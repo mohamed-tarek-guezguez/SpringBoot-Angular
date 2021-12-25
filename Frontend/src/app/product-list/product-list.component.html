@@ -122,37 +122,43 @@
   />
 </div>
 
-<div
-  class="
-    row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-6
-    g-4
-    justify-content-center
-  "
-  *ngIf="!isEmpty(); else empty"
->
-  <div class="col" *ngFor="let p of products">
-    <div class="card h-100">
-      <a
-        routerLink="/products/{{ p.id }}"
-        class="text-dark text-decoration-none h-100"
-      >
-        <div class="bg-image hover-zoom h-100">
-          <img
-            [src]="imgUrl + p.id"
-            class="card-img-top h-100"
-            alt="book-img"
-          />
+<div *ngIf="isLoading">
+  <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="!isLoading">
+  <div
+    class="
+      row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-6
+      g-4
+      justify-content-center
+    "
+    *ngIf="!isEmpty(); else empty"
+  >
+    <div class="col" *ngFor="let p of products">
+      <div class="card h-100">
+        <a
+          routerLink="/products/{{ p.id }}"
+          class="text-dark text-decoration-none h-100"
+        >
+          <div class="bg-image hover-zoom h-100">
+            <img
+              [src]="imgUrl + p.id"
+              class="card-img-top h-100"
+              alt="book-img"
+            />
+          </div>
+        </a>
+        <div class="card-body">
+          <h5 class="card-title mb-0 pb-0">
+            <a
+              routerLink="/products/{{ p.id }}"
+              class="text-dark text-decoration-none"
+            >
+              {{ p.name }}
+            </a>
+          </h5>
         </div>
-      </a>
-      <div class="card-body">
-        <h5 class="card-title mb-0 pb-0">
-          <a
-            routerLink="/products/{{ p.id }}"
-            class="text-dark text-decoration-none"
-          >
-            {{ p.name }}
-          </a>
-        </h5>
       </div>
     </div>
   </div>
@@ -160,7 +166,7 @@
 
 <div
   class="my-5 d-flex justify-content-center"
-  *ngIf="searchText == '' && categoryText == 'all' && totalPages > 1"
+  *ngIf="searchText === '' && categoryText === 'all' && totalPages > 1"
 >
   <nav aria-label="...">
     <ul class="pagination">
@@ -192,6 +198,49 @@
       </li>
 
       <li class="page-item border" *ngIf="currentPage < totalPages - 1">
+        <button class="page-link" (click)="Next()">Next</button>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<div
+  class="my-5 d-flex justify-content-center"
+  *ngIf="searchText !== '' && totalPagesSearch > 1"
+>
+  <nav aria-label="...">
+    <ul class="pagination">
+      <li class="page-item border" *ngIf="currentPageSearch > 0">
+        <button class="page-link" (click)="Prev()">Prev</button>
+      </li>
+
+      <li
+        class="page-item"
+        *ngFor="let item of [].constructor(totalPagesSearch); let i = index"
+      >
+        <button
+          class="page-link border active"
+          style="border-radius: 0"
+          *ngIf="currentPageSearch === i"
+          (click)="GoPage(i)"
+        >
+          {{ i + 1 }}
+        </button>
+
+        <button
+          class="page-link border"
+          style="border-radius: 0"
+          *ngIf="currentPageSearch !== i"
+          (click)="GoPage(i)"
+        >
+          {{ i + 1 }}
+        </button>
+      </li>
+
+      <li
+        class="page-item border"
+        *ngIf="currentPageSearch < totalPagesSearch - 1"
+      >
         <button class="page-link" (click)="Next()">Next</button>
       </li>
     </ul>

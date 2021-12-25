@@ -14,23 +14,50 @@ export class GetProductComponent implements OnInit {
 
   products?: Product[];
   searchText?: string = '';
+  isLoading?: boolean = true;
+  totalPages?: any;
+  currentPage: any = 0;
+  totalPagesSearch?: any;
+  currentPageSearch?: any = 0;
 
   imgUrl = 'http://localhost:8080/api/book/getImage/';
+
+  Load() {
+    this.service.getProductsPagin(this.currentPage).subscribe((data) => {
+      this.products = data.content;
+      this.totalPages = data.totalPages;
+      this.currentPage = data.number;
+
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 500);
+    });
+  }
+
+  LoadSearch() {
+    this.service
+      .getProductsByKeyword(this.searchText, this.currentPageSearch)
+      .subscribe((data) => {
+        this.products = data.content;
+        this.totalPagesSearch = data.totalPages;
+        this.currentPageSearch = data.number;
+      });
+  }
 
   ngOnInit(): void {
     if (!localStorage.getItem('authUserId')) {
       this.router.navigate(['login']);
     }
 
-    this.service.getProducts().subscribe((data) => {
-      this.products = data;
-    });
+    this.Load();
   }
 
   Search() {
-    this.service.getProductsByKeyword(this.searchText).subscribe((data) => {
-      this.products = data;
-    });
+    if (this.searchText === '') {
+      this.Load();
+    } else {
+      this.LoadSearch();
+    }
   }
 
   isEmpty() {
@@ -58,5 +85,43 @@ export class GetProductComponent implements OnInit {
         });
       }
     });
+  }
+
+  Prev() {
+    if (this.searchText === '') {
+      if (this.currentPage > 0) {
+        this.currentPage--;
+        this.Load();
+      }
+    } else {
+      if (this.currentPageSearch > 0) {
+        this.currentPageSearch--;
+        this.LoadSearch();
+      }
+    }
+  }
+
+  Next() {
+    if (this.searchText === '') {
+      if (this.currentPage < this.totalPages - 1) {
+        this.currentPage++;
+        this.Load();
+      }
+    } else {
+      if (this.currentPageSearch < this.totalPagesSearch - 1) {
+        this.currentPageSearch++;
+        this.LoadSearch();
+      }
+    }
+  }
+
+  GoPage(i: any) {
+    if (this.searchText === '') {
+      this.currentPage = i;
+      this.Load();
+    } else {
+      this.currentPageSearch = i;
+      this.LoadSearch();
+    }
   }
 }

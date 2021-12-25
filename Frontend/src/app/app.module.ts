@@ -28,6 +28,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactsComponent } from './admin/contacts/contacts.component';
 import { CartComponent } from './cart/cart.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { CartComponent } from './cart/cart.component';
     ContactComponent,
     ContactsComponent,
     CartComponent,
+    SpinnerComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

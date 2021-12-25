@@ -22,9 +22,18 @@ export class ProductService {
     return this.client.get<Product[]>(this.host);
   }
 
-  public getProductsByKeyword(keyword: any): Observable<Product[]> {
+  public getProductsPagin(currentPage: any = 0): Observable<any> {
+    return this.client.get<any>(`${this.host}/pagin?pageNo=${currentPage}`);
+  }
+
+  public getProductsByKeyword(
+    keyword: any,
+    currentPage: any = 0
+  ): Observable<any> {
     if (keyword !== '') {
-      return this.client.get<Product[]>(`${this.host}/keyword/${keyword}`);
+      return this.client.get<any>(
+        `${this.host}/keyword/${keyword}/?pageNo=${currentPage}`
+      );
     }
     return this.client.get<Product[]>(this.host);
   }
@@ -51,10 +60,6 @@ export class ProductService {
       produit,
       this.httpOptions
     );
-  }
-
-  public getProductsPagin(currentPage: any = 0): Observable<any> {
-    return this.client.get<any>(`${this.host}/pagin?pageNo=${currentPage}`);
   }
 
   public upload(file: any): Observable<any> {

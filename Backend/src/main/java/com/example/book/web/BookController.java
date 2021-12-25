@@ -52,8 +52,9 @@ public class BookController {
 	}
 	
 	@GetMapping("keyword/{keyword}")
-	public List<Book> getByKeyword(@PathVariable("keyword") String keyword) {
-		return gestionBook.getByKeyword(keyword);
+	public Page<Book> getByKeyword(@PathVariable("keyword") String keyword, @RequestParam(defaultValue = "0") Integer pageNo) {
+		Pageable paging = PageRequest.of(pageNo, 12);
+		return gestionBook.getByKeyword(keyword, paging);
 	}
 	
 	@GetMapping("byCategory/{keyword}")
